@@ -1,0 +1,10 @@
+---
+- name: Update apk tools and metadata
+  apk:
+    name: apk-tools
+    state: latest
+    update_cache: yes
+
+- name: Bring all packages up-to-date
+  apk:
+    upgrade: yes

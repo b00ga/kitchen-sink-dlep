@@ -1,0 +1,12 @@
+build_tools:
+  - gcc
+  - gcc-c++
+  - make
+  - cmake
+dlep_deps:
+  - readline-devel
+  - libxml2-devel
+  - protobuf-devel
+  - boost-devel
+  - doxygen
+  - graphviz

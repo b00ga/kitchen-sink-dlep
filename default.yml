@@ -1,0 +1,55 @@
+---
+- hosts: all
+
+  tasks:
+  - name: OS & Distribution related info
+    debug:
+      var: '{{ item }}'
+    with_items:
+    - ansible_os_family
+    - ansible_distribution
+    - ansible_distribution_version
+    - ansible_distribution_major_version
+    - ansible_distribution_minor_version
+
+  - group_by: key=os_{{ ansible_os_family }}
+  - group_by: key=os_{{ ansible_os_family }}_{{ ansible_distribution_major_version }}
+
+  - include: "{{ item }}"
+    with_first_found:
+      - files:
+          - tasks/os_{{ ansible_os_family }}.yml
+        skip: true
+
+  - name: Install git
+    package:
+      name: git
+      state: present
+
+  - name: Clone DLEP repo
+    git:
+      repo: https://github.com/b00ga/LL-DLEP
+      dest: /home/vagrant/dlep
+
+  - name: Install build tools
+    package:
+      name: '{{ item }}'
+      state: latest
+    with_items: '{{ build_tools }}'
+
+  - name: Install dlep build dependencies
+    package:
+      name: '{{ item }}'
+      state: latest
+    with_items: '{{ dlep_deps }}'
+
+  - name: Configure dlep source
+    command: cmake ..
+    args:
+      chdir: /home/vagrant/dlep/build
+    environment: '{{ build_env | default({}) }}'
+
+  - name: Build dlep source
+    command: make
+    args:
+      chdir: /home/vagrant/dlep/build
