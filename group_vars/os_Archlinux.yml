@@ -1,0 +1,12 @@
+build_tools:
+  - gcc
+  - make
+  - cmake
+dlep_deps:
+  - readline
+  - libxml2
+  - protobuf
+  - boost-libs
+  - boost
+  - doxygen
+  - graphviz

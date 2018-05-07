@@ -37,13 +37,22 @@ platforms:
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.3/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.3/systemsmanagement.repo
-#  - name: opensuse/openSUSE-Tumbleweed-x86_64
-#    provisioner:
-#      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Tumbleweed/devel:languages:python.repo
-#      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Tumbleweed/systemsmanagement.repo
   - name: generic/alpine37
     driver:
       vm_hostname: false
+  - name: generic/arch
+    provisioner:
+      custom_pre_install_command: |
+         sudo /usr/bin/pacman -Syyu --noconfirm && \
+         sudo /usr/bin/pacman -S --verbose --noconfirm ansible
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: generic/freebsd11
+    provisioner:
+      custom_pre_install_command: sudo pkg install -y ansible
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: generic/openbsd6
+    provisioner:
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
 
 suites:
   - name: default

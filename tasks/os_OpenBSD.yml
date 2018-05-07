@@ -1,0 +1,27 @@
+---
+- name: Install GNU tar
+  openbsd_pkg:
+    name: gtar--
+    state: present
+
+- name: Download X11 sets
+  get_url:
+    url: '{{ item }}'
+    dest: /
+  with_items:
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xbase62.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xfont62.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xserv62.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xshare62.tgz
+
+- name: Extract X11 sets
+  unarchive:
+    src: '/{{ item }}'
+    remote_src: yes
+    dest: /
+    extra_opts: '-p'
+  with_items:
+  - xbase62.tgz
+  - xfont62.tgz
+  - xserv62.tgz
+  - xshare62.tgz

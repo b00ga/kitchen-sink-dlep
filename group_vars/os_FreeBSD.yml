@@ -1,0 +1,11 @@
+build_tools:
+  - cmake
+dlep_deps:
+  - readline
+  - libxml2
+  - protobuf
+  - boost-all
+  - doxygen
+  - graphviz
+build_env:
+  LDFLAGS: -L/usr/local/lib
