@@ -1,0 +1,15 @@
+netbsd_mirror_url: http://mirrors.mit.edu/NetBSD/NetBSD-7.1.2/amd64/binary/sets/
+build_tools:
+  - clang
+  - cmake
+dlep_deps:
+  - readline
+  - libxml
+  - protobuf
+  - boost
+  - doxygen
+  - graphviz
+build_env:
+  CC: clang
+  CXX: clang++
+  LDFLAGS: -L/usr/pkg/lib

@@ -1,0 +1,39 @@
+---
+- name: Fixup pkgin repository URL
+  replace:
+    path: '/usr/pkg/etc/pkgin/repositories.conf'
+    regexp: '7\.1\/All'
+    replace: '$osrelease/All'
+
+- name: Update pkgin repository database
+  pkgin:
+    update_cache: yes
+
+- name: Set pkgin as our package manager
+  set_fact:
+    ansible_pkg_mgr: pkgin
+
+- name: Install GNU tar
+  package:
+    name: 'gtar'
+    state: present
+
+- name: Download additional NetBSD sets
+  get_url:
+    url: '{{ netbsd_mirror_url }}/{{ taskitem }}'
+    dest: /
+  with_items:
+  - xbase.tgz
+  loop_control:
+    loop_var: taskitem
+
+- name: Extract additional NetBSD sets
+  unarchive:
+    src: '/{{ taskitem }}'
+    remote_src: yes
+    dest: /
+    extra_opts: '-p'
+  with_items:
+  - xbase.tgz
+  loop_control:
+    loop_var: taskitem

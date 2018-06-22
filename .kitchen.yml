@@ -53,6 +53,16 @@ platforms:
   - name: generic/openbsd6
     provisioner:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: mcandre/vagrant-netbsd-cmake-amd64
+    provisioner:
+      custom_pre_install_command: |
+         sudo PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/x86_64/7.1_2018Q1/All/" pkg_add ansible sudo pkgin
+         sudo mozilla-rootcerts install > /dev/null
+         # mcandre's boxes, /bin/sudo us a shell script wrapper around /bin/su
+         # This shell script fails to pass kitchen-vagrant args correctly so we need real sudo
+         echo 'vagrant ALL=(ALL) NOPASSWD: ALL' | sudo tee /usr/pkg/etc/sudoers.d/vagrant
+         /usr/pkg/bin/sudo sh -c '[ -f /bin/sudo ] && rm -f /bin/sudo'
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
 
 suites:
   - name: default
