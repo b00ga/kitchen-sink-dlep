@@ -63,6 +63,25 @@ platforms:
          echo 'vagrant ALL=(ALL) NOPASSWD: ALL' | sudo tee /usr/pkg/etc/sudoers.d/vagrant
          /usr/pkg/bin/sudo sh -c '[ -f /bin/sudo ] && rm -f /bin/sudo'
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
+  - name: luminositylabsllc/omniosce-r151026
+    driver:
+     customize:
+       memory: 2048
+    provisioner:
+      custom_pre_install_command: |
+        # luminositylabsllc boxes have static /etc/resolv.conf
+        # Found dhcpinfo commands to get it from DHCP from the following blog post:
+        # https://sysdef.xyz/post/2012-10-21-omnios-dns-on-aws
+        echo "domain $(dhcpinfo DNSdmain)" | pfexec tee /etc/resolv.conf
+        echo "nameserver $(dhcpinfo DNSserv)" | pfexec tee -a  /etc/resolv.conf
+        # Ansible isn't available from any of the common IPS repos
+        # Install pkgsrc/pkgin and use those packages to get ansible
+        if [ ! -f bootstrap-2018Q1-x86_64.tar.gz ]; then curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2018Q1-x86_64.tar.gz ; fi
+        if [ ! -d /opt/local ]; then pfexec tar -zxpf bootstrap-2018Q1-x86_64.tar.gz -C / ; fi
+        pfexec /opt/local/bin/pkgin -y update
+        pfexec /opt/local/bin/pkgin -y install ansible
+      ansible_binary_path: /opt/local/bin
+      #ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
 
 suites:
   - name: default

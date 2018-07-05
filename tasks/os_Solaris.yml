@@ -1,0 +1,4 @@
+---
+- name: Set pkgin as our package manager
+  set_fact:
+    ansible_pkg_mgr: pkgin

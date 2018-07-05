@@ -1,0 +1,18 @@
+gitbin: /opt/local/bin/git
+build_tools:
+  - gcc49
+  - gmake
+  - cmake
+dlep_deps:
+  - readline
+  - libxml
+  - protobuf
+  - boost
+  - doxygen
+  - graphviz
+build_env:
+  PATH: /opt/local/bin:$PATH
+  CC: /opt/local/gcc49/bin/gcc
+  CXX: /opt/local/gcc49/bin/g++
+  CXXFLAGS: -pthread -m64
+  LDFLAGS: -L/opt/local/lib -lnsl -lsocket -lcurses -lreadline -R/opt/local/lib
