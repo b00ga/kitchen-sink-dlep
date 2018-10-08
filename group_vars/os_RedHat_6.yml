@@ -1,7 +1,7 @@
 build_tools:
   - centos-release-scl
-  - devtoolset-3-gcc
-  - devtoolset-3-gcc-c++
+  - devtoolset-7-gcc
+  - devtoolset-7-gcc-c++
   - make
   - cmake
 dlep_deps:
