@@ -13,7 +13,7 @@ dlep_deps:
   - doxygen
   - graphviz
 build_env:
-  CC: /opt/rh/devtoolset-3/root/usr/bin/gcc
-  CXX: /opt/rh/devtoolset-3/root/usr/bin/g++
+  CC: /opt/rh/devtoolset-7/root/usr/bin/gcc
+  CXX: /opt/rh/devtoolset-7/root/usr/bin/g++
   BOOST_INCLUDEDIR: /usr/include/boost148/
   BOOST_LIBRARYDIR: /usr/lib64/boost148/
