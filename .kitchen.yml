@@ -48,7 +48,7 @@ platforms:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/freebsd11
     provisioner:
-      custom_pre_install_command: sudo pkg install -y ansible
+      custom_pre_install_command: sudo pkg install -y py27-ansible
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/openbsd6
     provisioner:
