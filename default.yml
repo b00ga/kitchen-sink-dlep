@@ -29,7 +29,7 @@
 
   - name: Clone DLEP repo
     git:
-      repo: https://github.com/b00ga/LL-DLEP
+      repo: '{{ dlep_repo_url }}'
       dest: /home/vagrant/dlep
       executable: '{{ gitbin }}'
 
