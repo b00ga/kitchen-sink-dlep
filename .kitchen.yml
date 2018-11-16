@@ -38,9 +38,21 @@ platforms:
       python_sles_repo: ''
       #python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.3/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.3/systemsmanagement.repo
+  - name: generic/alpine38
+    driver:
+      vm_hostname: false
+    provisioner:
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python3"'
   - name: generic/alpine37
     driver:
       vm_hostname: false
+  - name: generic/alpine36
+    driver:
+      vm_hostname: false
+    provisioner:
+      custom_pre_install_command: |
+         sudo apk add py2-pip py2-pynacl@edge py2-paramiko py2-jinja2 py2-yaml && \
+         sudo pip2 install ansible
   - name: generic/arch
     provisioner:
       custom_pre_install_command: |
