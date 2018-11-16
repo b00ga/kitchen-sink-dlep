@@ -8,7 +8,7 @@ provisioner:
   require_chef_for_busser: false
   additional_copy_path: tasks
   ansible_verbose: true
-  ansible_verbosity: 3
+  ansible_verbosity: 4
 
 transport:
   name: ssh
@@ -35,7 +35,8 @@ platforms:
   - name: debian/jessie64
   - name: opensuse/openSUSE-42.3-x86_64
     provisioner:
-      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.3/devel:languages:python.repo
+      python_sles_repo: ''
+      #python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.3/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.3/systemsmanagement.repo
   - name: generic/alpine37
     driver:
