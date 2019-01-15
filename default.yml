@@ -32,6 +32,7 @@
       repo: '{{ dlep_repo_url }}'
       dest: '{{ ansible_user_dir }}/dlep'
       executable: '{{ gitbin }}'
+      version: 'd1c3f6c40a8cf864b835f4c668bc37cd96957348'  # Last 1.x commit
 
   - name: Install build tools
     package:
