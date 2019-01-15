@@ -91,6 +91,7 @@ platforms:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
   - name: luminositylabsllc/omniosce-r151026
     driver:
+     vm_hostname: false
      customize:
        memory: 2048
     provisioner:
