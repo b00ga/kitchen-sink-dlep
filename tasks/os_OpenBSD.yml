@@ -9,10 +9,10 @@
     url: '{{ item }}'
     dest: /
   with_items:
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xbase62.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xfont62.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xserv62.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.2/amd64/xshare62.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xbase64.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xfont64.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xserv64.tgz
+  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xshare64.tgz
 
 - name: Extract X11 sets
   unarchive:
@@ -21,7 +21,7 @@
     dest: /
     extra_opts: '-p'
   with_items:
-  - xbase62.tgz
-  - xfont62.tgz
-  - xserv62.tgz
-  - xshare62.tgz
+  - xbase64.tgz
+  - xfont64.tgz
+  - xserv64.tgz
+  - xshare64.tgz
