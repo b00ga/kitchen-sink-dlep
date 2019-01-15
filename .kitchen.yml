@@ -42,6 +42,8 @@ platforms:
     provisioner:
       python_sles_repo: ''
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_15.0/systemsmanagement.repo
+      custom_pre_install_command: |
+          sudo zypper install -y branding-openSUSE
   - name: generic/alpine38
     driver:
       vm_hostname: false
