@@ -73,6 +73,9 @@ platforms:
     provisioner:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: dragonflybsd/dragonfly520
+    provisioner:
+      custom_pre_install_command: sudo pkg install -y py27-ansible
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/local/bin/python2.7"'
   - name: generic/netbsd8
     provisioner:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
