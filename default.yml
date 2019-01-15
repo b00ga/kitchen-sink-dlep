@@ -30,7 +30,7 @@
   - name: Clone DLEP repo
     git:
       repo: '{{ dlep_repo_url }}'
-      dest: /home/vagrant/dlep
+      dest: '{{ ansible_user_dir }}/dlep'
       executable: '{{ gitbin }}'
 
   - name: Install build tools
@@ -48,10 +48,10 @@
   - name: Configure dlep source
     command: cmake ..
     args:
-      chdir: /home/vagrant/dlep/build
+      chdir: '{{ ansible_user_dir }}/dlep/build'
     environment: '{{ build_env | default({}) }}'
 
   - name: Build dlep source
     command: make
     args:
-      chdir: /home/vagrant/dlep/build
+      chdir: '{{ ansible_user_dir }}/dlep/build'
