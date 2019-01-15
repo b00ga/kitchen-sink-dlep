@@ -7,7 +7,7 @@ provisioner:
   hosts: all
   require_chef_for_busser: false
   additional_copy_path: tasks
-  ansible_verbose: true
+  ansible_verbose: false
   ansible_verbosity: 4
 
 transport:
@@ -38,6 +38,10 @@ platforms:
       python_sles_repo: ''
       #python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.3/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.3/systemsmanagement.repo
+  - name: opensuse/openSUSE-15.0-x86_64
+    provisioner:
+      python_sles_repo: ''
+      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_15.0/systemsmanagement.repo
   - name: generic/alpine38
     driver:
       vm_hostname: false
@@ -65,6 +69,10 @@ platforms:
   - name: generic/openbsd6
     provisioner:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: dragonflybsd/dragonfly520
+  - name: generic/netbsd8
+    provisioner:
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
   - name: mcandre/vagrant-netbsd-cmake-amd64
     provisioner:
       custom_pre_install_command: |
@@ -114,6 +122,11 @@ platforms:
         pfexec /opt/local/bin/pkgin -y install ansible
       ansible_binary_path: /opt/local/bin
       #ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
+  - name: openindiana/hipster
+    driver:
+     vm_hostname: false
+    provisioner:
+      ansible_binary_path: /opt/local/bin
 
 suites:
   - name: default
