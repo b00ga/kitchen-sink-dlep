@@ -40,7 +40,8 @@ platforms:
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.3/systemsmanagement.repo
   - name: opensuse/openSUSE-15.0-x86_64
     provisioner:
-      python_sles_repo: ''
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/python3"'
+      python_sles_repo: https://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_15.0/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_15.0/systemsmanagement.repo
       custom_pre_install_command: |
           sudo zypper install -y branding-openSUSE

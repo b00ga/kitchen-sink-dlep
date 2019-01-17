@@ -1,0 +1,16 @@
+---
+- name: Add the devel:libraries:c_c++ build service repo
+  get_url:
+    url: 'https://download.opensuse.org/repositories/devel:libraries:c_c++/openSUSE_Leap_{{ ansible_distribution_version }}/devel:libraries:c_c++.repo'
+    dest: '/etc/zypp/repos.d/devel_libraries_c_c++.repo'
+  register: develrepo
+
+- name: Import RPM GPG key for devel:libraries:c_c++ repo
+  rpm_key:
+    key: 'http://download.opensuse.org/repositories/devel:/libraries:/c_c%2B%2B/openSUSE_Leap_{{ ansible_distribution_version }}/repodata/repomd.xml.key'
+    state: present
+
+- name: Refresh the devel:libraries:c_c++ repo if needed
+  command: zypper refresh devel_libraries_c_c++
+  when: develrepo.changed
+

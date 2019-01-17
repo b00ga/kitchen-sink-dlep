@@ -7,6 +7,8 @@ dlep_deps:
   - readline-devel
   - libxml2-devel
   - protobuf-devel
-  - boost-devel
+  - libboost_system1_69_0-devel
+  - libboost_thread1_69_0-devel
+  - libboost_test1_69_0-devel
   - doxygen
   - graphviz
