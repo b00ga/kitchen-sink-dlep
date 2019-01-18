@@ -74,8 +74,15 @@ platforms:
     provisioner:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: dragonflybsd/dragonfly520
+    driver:
+     customize:
+       memory: 2048
     provisioner:
-      custom_pre_install_command: sudo pkg install -y py27-ansible
+      # sed statement flips package mirror from slow master mirror to NYCBUG mirror
+      custom_pre_install_command: |
+         sudo sed -i.bak -e 's/enabled.*yes/enabled : no/' \
+           -e '/^NYCBUG/{n;n;s/no/yes/;}' /usr/local/etc/pkg/repos/df-latest.conf && \
+         sudo pkg install -y py27-ansible
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/local/bin/python2.7"'
   - name: generic/netbsd8
     provisioner:
