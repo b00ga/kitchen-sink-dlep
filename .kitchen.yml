@@ -72,6 +72,9 @@ platforms:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/openbsd6
     provisioner:
+      # Use faster mirror than comes default in the vagrant image
+      custom_pre_install_command: |
+         echo 	https://fastly.cdn.openbsd.org/pub/OpenBSD/ | sudo tee /etc/installurl
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: dragonflybsd/dragonfly520
     driver:

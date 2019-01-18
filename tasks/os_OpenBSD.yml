@@ -6,17 +6,19 @@
 
 - name: Download X11 sets
   get_url:
-    url: '{{ item }}'
+    url: '{{ xset }}'
     dest: /
   with_items:
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xbase64.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xfont64.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xserv64.tgz
-  - https://ftp.usa.openbsd.org/pub/OpenBSD/6.4/amd64/xshare64.tgz
+  - https://fastly.cdn.openbsd.org/pub/OpenBSD/6.4/amd64/xbase64.tgz
+  - https://fastly.cdn.openbsd.org/pub/OpenBSD/6.4/amd64/xfont64.tgz
+  - https://fastly.cdn.openbsd.org/pub/OpenBSD/6.4/amd64/xserv64.tgz
+  - https://fastly.cdn.openbsd.org/pub/OpenBSD/6.4/amd64/xshare64.tgz
+  loop_control:
+    loop_var: xset
 
 - name: Extract X11 sets
   unarchive:
-    src: '/{{ item }}'
+    src: '/{{ xset }}'
     remote_src: yes
     dest: /
     extra_opts: '-p'
@@ -25,3 +27,5 @@
   - xfont64.tgz
   - xserv64.tgz
   - xshare64.tgz
+  loop_control:
+    loop_var: xset
