@@ -66,6 +66,10 @@ platforms:
       custom_pre_install_command: |
          sudo /usr/bin/pacman -Syyu --noconfirm && \
          sudo /usr/bin/pacman -S --verbose --noconfirm ansible
+  - name: generic/freebsd12
+    provisioner:
+      custom_pre_install_command: sudo pkg install -y py27-ansible
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/freebsd11
     provisioner:
       custom_pre_install_command: sudo pkg install -y py27-ansible
@@ -76,7 +80,8 @@ platforms:
       custom_pre_install_command: |
          echo 	https://fastly.cdn.openbsd.org/pub/OpenBSD/ | sudo tee /etc/installurl
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
-  - name: dragonflybsd/dragonfly520
+  #- name: dragonflybsd/dragonfly520
+  - name: generic/dragonflybsd5
     driver:
      customize:
        memory: 2048
@@ -89,11 +94,13 @@ platforms:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/local/bin/python2.7"'
   - name: generic/netbsd8
     provisioner:
+      custom_pre_install_command: |
+          sudo pkgin -y install ansible 
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
   - name: mcandre/vagrant-netbsd-cmake-amd64
     provisioner:
       custom_pre_install_command: |
-         sudo PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/x86_64/7.1_2018Q1/All/" pkg_add ansible sudo pkgin
+         sudo PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/x86_64/7.1_2018Q4/All/" pkg_add ansible pkgin sudo
          sudo mozilla-rootcerts install > /dev/null
          # mcandre's boxes, /bin/sudo us a shell script wrapper around /bin/su
          # This shell script fails to pass kitchen-vagrant args correctly so we need real sudo
@@ -114,8 +121,8 @@ platforms:
         echo "nameserver $(dhcpinfo DNSserv)" | pfexec tee -a  /etc/resolv.conf
         # Ansible isn't available from any of the common IPS repos
         # Install pkgsrc/pkgin and use those packages to get ansible
-        if [ ! -f bootstrap-2018Q1-x86_64.tar.gz ]; then curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2018Q1-x86_64.tar.gz ; fi
-        if [ ! -d /opt/local ]; then pfexec tar -zxpf bootstrap-2018Q1-x86_64.tar.gz -C / ; fi
+        if [ ! -f bootstrap-2018Q4-x86_64.tar.gz ]; then curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2018Q4-x86_64.tar.gz ; fi
+        if [ ! -d /opt/local ]; then pfexec tar -zxpf bootstrap-2018Q4-x86_64.tar.gz -C / ; fi
         pfexec /opt/local/bin/pkgin -y update
         pfexec /opt/local/bin/pkgin -y install ansible
       ansible_binary_path: /opt/local/bin
@@ -134,8 +141,8 @@ platforms:
         echo "nameserver $(dhcpinfo DNSserv)" | pfexec tee -a  /etc/resolv.conf
         # Ansible isn't available from any of the common IPS repos
         # Install pkgsrc/pkgin and use those packages to get ansible
-        if [ ! -f bootstrap-2018Q1-x86_64.tar.gz ]; then curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2018Q1-x86_64.tar.gz ; fi
-        if [ ! -d /opt/local ]; then pfexec tar -zxpf bootstrap-2018Q1-x86_64.tar.gz -C / ; fi
+        if [ ! -f bootstrap-2018Q4-x86_64.tar.gz ]; then curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2018Q4-x86_64.tar.gz ; fi
+        if [ ! -d /opt/local ]; then pfexec tar -zxpf bootstrap-2018Q4-x86_64.tar.gz -C / ; fi
         pfexec /opt/local/bin/pkgin -y update
         pfexec /opt/local/bin/pkgin -y install ansible
       ansible_binary_path: /opt/local/bin

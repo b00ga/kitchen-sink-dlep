@@ -24,6 +24,10 @@
     dest: /
   with_items:
   - xbase.tgz
+  - xfont.tgz
+  - xcomp.tgz
+  - xserver.tgz
+  - xetc.tgz
   loop_control:
     loop_var: taskitem
 
@@ -35,5 +39,9 @@
     extra_opts: '-p'
   with_items:
   - xbase.tgz
+  - xfont.tgz
+  - xcomp.tgz
+  - xserver.tgz
+  - xetc.tgz
   loop_control:
     loop_var: taskitem

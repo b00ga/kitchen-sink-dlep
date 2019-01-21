@@ -34,6 +34,10 @@
       executable: '{{ gitbin }}'
       version: 'd1c3f6c40a8cf864b835f4c668bc37cd96957348'  # Last 1.x commit
 
+  - name: Package manager
+    debug:
+      msg: 'Ansible package manager --> {{ ansible_facts.pkg_mgr }}'
+
   - name: Install build tools
     package:
       name: '{{ item }}'
