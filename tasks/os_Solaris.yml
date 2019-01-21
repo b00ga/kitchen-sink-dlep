@@ -1,4 +1,15 @@
 ---
+- name: Install Illumos packages for compiling
+  package:
+    name: '{{ package }}'
+    use: pkg5
+  with_items:
+    - lint
+    - system/header
+  loop_control:
+    loop_var: package
+  
+
 - name: Set pkgin as our package manager
   set_fact:
     ansible_facts:

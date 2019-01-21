@@ -1,6 +1,6 @@
 gitbin: /opt/local/bin/git
 build_tools:
-  - gcc49
+  - gcc8
   - gmake
   - cmake
 dlep_deps:
@@ -12,7 +12,7 @@ dlep_deps:
   - graphviz
 build_env:
   PATH: /opt/local/bin:$PATH
-  CC: /opt/local/gcc49/bin/gcc
-  CXX: /opt/local/gcc49/bin/g++
+  CC: /opt/local/gcc8/bin/gcc
+  CXX: /opt/local/gcc8/bin/g++
   CXXFLAGS: -pthread -m64
   LDFLAGS: -L/opt/local/lib -lnsl -lsocket -lcurses -lreadline -R/opt/local/lib
