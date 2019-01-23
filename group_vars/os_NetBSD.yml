@@ -1,4 +1,4 @@
-netbsd_mirror_url: http://mirrors.mit.edu/NetBSD/NetBSD-7.1.2/amd64/binary/sets/
+netbsd_mirror_url: http://mirrors.mit.edu/NetBSD/NetBSD-{{ ansible_distribution_release }}/amd64/binary/sets/
 build_tools:
   - clang
   - cmake

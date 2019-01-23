@@ -95,6 +95,9 @@ platforms:
   - name: generic/netbsd8
     provisioner:
       custom_pre_install_command: |
+          sudo sed -i -e 's/^http/#http/' /usr/pkg/etc/pkgin/repositories.conf
+          echo http://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/8.0_2018Q4/All | sudo tee -a /usr/pkg/etc/pkgin/repositories.conf
+          sudo pkgin -y update
           sudo pkgin -y install ansible 
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
   - name: mcandre/vagrant-netbsd-cmake-amd64
