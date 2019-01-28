@@ -56,6 +56,11 @@ platforms:
   - name: generic/alpine37
     driver:
       vm_hostname: false
+    provisioner:
+      custom_pre_install_command: |
+         sudo apk update && \
+         sudo apk add py2-pip py2-pynacl@edge py2-paramiko py2-jinja2 py2-yaml && \
+         sudo pip2 install ansible
   - name: generic/alpine36
     driver:
       vm_hostname: false
