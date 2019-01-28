@@ -26,6 +26,9 @@ platforms:
      customize:
        memory: 1024 
   - name: ubuntu/bionic64
+    driver:
+     customize:
+       memory: 2048 
   - name: ubuntu/xenial64
   - name: ubuntu/trusty64
     driver:
