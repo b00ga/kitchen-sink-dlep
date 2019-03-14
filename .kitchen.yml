@@ -17,11 +17,11 @@ transport:
 platforms:
   - name: centos/7
   - name: centos/6
-  - name: fedora/28-cloud-base
+  - name: fedora/29-cloud-base
     driver:
      customize:
        memory: 1024 
-  - name: fedora/27-cloud-base
+  - name: fedora/28-cloud-base
     driver:
      customize:
        memory: 1024 
