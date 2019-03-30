@@ -10,3 +10,4 @@ dlep_deps:
   - boost
   - doxygen
   - graphviz
+cmake_opts: -DWARNINGS_AS_ERRORS=OFF
