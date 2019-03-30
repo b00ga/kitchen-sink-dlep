@@ -13,6 +13,7 @@
     - ansible_distribution_minor_version
 
   - group_by: key=os_{{ ansible_os_family }}
+  - group_by: key=os_{{ ansible_distribution }}
   - group_by: key=os_{{ ansible_os_family }}_{{ ansible_distribution_major_version }}
     when: ansible_distribution_major_version is defined
 
@@ -52,7 +53,7 @@
     with_items: '{{ dlep_deps }}'
 
   - name: Configure dlep source
-    command: cmake ..
+    command: cmake {{ cmake_opts }} ..
     args:
       chdir: '{{ ansible_user_dir }}/dlep/build'
     environment: '{{ build_env | default({}) }}'
