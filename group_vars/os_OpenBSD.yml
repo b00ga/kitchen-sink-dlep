@@ -9,3 +9,4 @@ dlep_deps:
   - graphviz
 build_env:
   LDFLAGS: -lcurses
+cmake_opts: -DWARNINGS_AS_ERRORS=OFF
