@@ -16,3 +16,4 @@ build_env:
   CXX: /opt/local/gcc8/bin/g++
   CXXFLAGS: -pthread -m64
   LDFLAGS: -L/opt/local/lib -lnsl -lsocket -lcurses -lreadline -R/opt/local/lib
+cmake_opts: -DWARNINGS_AS_ERRORS=OFF
