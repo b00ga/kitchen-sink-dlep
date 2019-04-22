@@ -76,11 +76,15 @@ platforms:
          sudo /usr/bin/pacman -S --verbose --noconfirm ansible
   - name: generic/freebsd12
     provisioner:
-      custom_pre_install_command: sudo pkg install -y py27-ansible
+      custom_pre_install_command: |
+          sudo pkg install -y py27-ansible
+          sudo ln -s /usr/local/bin/ansible-playbook-2.7 /usr/local/bin/ansible-playbook
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/freebsd11
     provisioner:
-      custom_pre_install_command: sudo pkg install -y py27-ansible
+      custom_pre_install_command: |
+          sudo pkg install -y py27-ansible
+          sudo ln -s /usr/local/bin/ansible-playbook-2.7 /usr/local/bin/ansible-playbook
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: generic/openbsd6
     provisioner:
