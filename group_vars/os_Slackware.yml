@@ -1,0 +1,13 @@
+build_tools:
+  - gcc
+  - gcc-g++
+  - cmake
+dlep_deps:
+  - readline
+  - libxml2
+  - protobuf
+  - boost
+  - doxygen
+  - graphviz
+build_env:
+  LDFLAGS: -lncurses

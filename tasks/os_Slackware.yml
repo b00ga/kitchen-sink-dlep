@@ -1,0 +1,43 @@
+---
+- name: Set slackpkg as our package manager
+  set_fact:
+    ansible_facts:
+      pkg_mgr: slackpkg
+
+- name: Determine latest release of slackpkg+
+  set_fact:
+    slackpkgplus_latest: "{{ (lookup('url','http://versaweb.dl.sourceforge.net/project/slackpkgplus/ChangeLog.txt',split_lines=False).splitlines() | select('search','pkg/slackpkg+') | first).split(':')[0] | basename }}"
+
+- name: Detect installed slackpkg+ state
+  stat:
+    path: '/var/log/packages/{{ (slackpkgplus_latest | splitext)[0] }}'
+  register: spp
+
+- name: Download latest slacpkg+
+  get_url:
+    url: 'http://versaweb.dl.sourceforge.net/project/slackpkgplus/{{ slackpkgplus_latest }}'
+    dest: '/tmp/{{ slackpkgplus_latest }}'
+
+- name: Install slackpkg+
+  command: '/sbin/installpkg /tmp/{{ slackpkgplus_latest }}'
+  args:
+    creates: '/var/log/packages/{{ (slackpkgplus_latest | splitext)[0] }}'
+  register: spp_inst
+
+- name: Add slackonly repo to slackpkg+ config
+  lineinfile:
+    path: '/etc/slackpkg/slackpkgplus.conf'
+    regexp: '^REPOPLUS='
+    line: 'REPOPLUS=( slackpkgplus slackonly )'
+
+- name: Add a mirror line for slackonly to sloackpkg+ config
+  lineinfile:
+    path: '/etc/slackpkg/slackpkgplus.conf'
+    regexp: "^MIRRORPLUS['slackonly']="
+    line: "MIRRORPLUS['slackonly']=http://packages.slackonly.com/pub/packages/14.2-x86_64/"
+
+- name: Update slackpkg GPG keys
+  command: /usr/sbin/slackpkg update gpg
+
+- name: Update slackpkg database
+  command: /usr/sbin/slackpkg update

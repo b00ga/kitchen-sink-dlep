@@ -7,7 +7,7 @@ provisioner:
   hosts: all
   require_chef_for_busser: false
   additional_copy_path: tasks
-  ansible_verbose: false
+  ansible_verbose: true
   ansible_verbosity: 4
 
 transport:
@@ -74,6 +74,14 @@ platforms:
       custom_pre_install_command: |
          sudo /usr/bin/pacman -Syyu --noconfirm && \
          sudo /usr/bin/pacman -S --verbose --noconfirm ansible
+  - name: talosthoren/slackware64-14.2
+    driver:
+     customize:
+       memory: 1024 
+    provisioner:
+      custom_pre_install_command: |
+         sudo easy_install pip
+         sudo pip install ansible
   - name: generic/freebsd12
     provisioner:
       custom_pre_install_command: |
