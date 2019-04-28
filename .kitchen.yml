@@ -36,6 +36,15 @@ platforms:
        memory: 1024 
   - name: debian/stretch64
   - name: debian/jessie64
+  - name: mutinyuxpx/devuan-ascii-base
+    driver:
+      username: vagrant
+      password: vagrant
+      vm_hostname: false
+    provisioner:
+      custom_pre_install_command: |
+          echo vagrant | sudo --stdin sed -i -e's/^%sudo.*$/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
+      require_pip: 2.7.10
   - name: opensuse/openSUSE-42.3-x86_64
     provisioner:
       python_sles_repo: ''
