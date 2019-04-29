@@ -7,7 +7,7 @@ provisioner:
   hosts: all
   require_chef_for_busser: false
   additional_copy_path: tasks
-  ansible_verbose: true
+  ansible_verbose: false
   ansible_verbosity: 4
 
 transport:
