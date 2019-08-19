@@ -17,11 +17,11 @@ transport:
 platforms:
   - name: centos/7
   - name: centos/6
-  - name: fedora/29-cloud-base
+  - name: fedora/30-cloud-base
     driver:
      customize:
        memory: 1024 
-  - name: fedora/28-cloud-base
+  - name: fedora/29-cloud-base
     driver:
      customize:
        memory: 1024 
@@ -34,6 +34,7 @@ platforms:
     driver:
      customize:
        memory: 1024 
+  - name: generic/debian10
   - name: debian/stretch64
   - name: debian/jessie64
   - name: mutinyuxpx/devuan-ascii-base
@@ -45,6 +46,10 @@ platforms:
       custom_pre_install_command: |
           echo vagrant | sudo --stdin sed -i -e's/^%sudo.*$/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
       require_pip: 2.7.10
+  - name: AntonioMeireles/ClearLinux
+    provisioner:
+      custom_pre_install_command: |
+          sudo swupd bundle-add  ansible
   - name: opensuse/openSUSE-42.3-x86_64
     provisioner:
       python_sles_repo: ''

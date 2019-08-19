@@ -1,0 +1,9 @@
+build_tools:
+  - devpkg-base
+dlep_deps:
+  - devpkg-libxml2
+  - sysadmin-basic-dev
+  - devpkg-boost
+  - doxygen
+  - graphviz
+cmake_opts: -DWARNINGS_AS_ERRORS=OFF
