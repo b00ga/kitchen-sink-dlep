@@ -6,6 +6,7 @@ build_tools:
 dlep_deps:
   - libreadline-dev
   - libxml2-dev
+  - libxml2-utils
   - libprotobuf-dev
   - protobuf-compiler
   - libboost-all-dev
